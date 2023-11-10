@@ -1,0 +1,1 @@
+Views in MVC are responsible for displaying the data that is received from the controller as a result. Views are responsible for the look and feel of the application. Views are created using HTML, CSS, JavaScript, and Razor syntax. Razor syntax is used to display the data received from the controller. Views are stored in the Views folder of the application.

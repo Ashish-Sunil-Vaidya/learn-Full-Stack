@@ -1,0 +1,1 @@
+Models in MVC are the classes that represent the data and the business logic. They are the classes that are responsible for storing and retrieving data from the database. They are also responsible for validating the data that is passed to and from the controller.

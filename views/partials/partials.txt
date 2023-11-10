@@ -1,0 +1,1 @@
+Partials are a temporay solution to the problem of having to use the same code in multiple places.
