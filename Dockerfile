@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . /app
 
 # Install the application dependencies
-RUN yarn
+RUN npm install
 
 # Define the entry point for the container
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
