@@ -1,6 +1,7 @@
 <h2>Create a new Author</h2>
 <form action="/authors" method="POST">
-    <%- include('../partials/form_fields') %>
+    <label for="name">Name</label>:
+    <input type="text" name="name" id="name" value="<%= author.name %>" required>
     <input type="submit" value="Create Author">
     <a href="/authors">Cancel</a>
 </form>

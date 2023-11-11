@@ -1,1 +1,8 @@
-This is from index.ejs
+<h2>Recently Added</h2>
+<div>
+    <ul>
+        <% books.forEach(book=> { %>
+            <img height="150" src="<%= book.coverImagePath %>">
+            <% }) %>
+    </ul>
+</div>

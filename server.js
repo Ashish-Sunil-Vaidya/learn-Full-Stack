@@ -14,7 +14,8 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const productionPORT = process.env.PORT;
 const indexRouter = require('./routes/index');
-const authorsRouter = require('./routes/authours')
+const authorsRouter = require('./routes/authours');
+const booksRouter = require('./routes/books')
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const bodyParser = require('body-parser');
@@ -32,20 +33,20 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: 'false' }));
 // To apply all the routes  
 app.use('/', indexRouter);
 app.use('/authors', authorsRouter);
-
+app.use('/books',booksRouter);
 
 // Connect to mongodb
 mongoose.connect(process.env.DB_URL);
-
 // Check if it's connected
 db.on('open', () => {
-    console.log("Connection Successfull...");
+    console.log("Connection Successful ✔️");
 })
 db.on('error', () => {
-    console.log("Connection failed...");
+    console.error("Connection failed ❌");
 })
 
 //Use .env for production for dev use 3000
 app.listen(productionPORT || 3000, () => {
     console.log("Server connection to port: " + (productionPORT || 3000));
+    console.log('Connecting to Database ...');
 })
