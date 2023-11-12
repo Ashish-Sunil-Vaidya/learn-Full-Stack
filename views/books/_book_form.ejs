@@ -1,4 +1,4 @@
-<form action="/books" enctype="multipart/form-data" method="POST">
+<form action="/books" method="POST">
     <div>
         <label for="title">Title</label>:
         <input type="text" name="title" id="title" value="<%= book.title %>" required>
@@ -34,7 +34,7 @@
 
     <div>
         <label for="cover">Cover Image</label>:
-        <input type="file" name="cover" id="cover">
+        <input type="file" name="cover" class="filepond">
     </div>
 
     <div>
