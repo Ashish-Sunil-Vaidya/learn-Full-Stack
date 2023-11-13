@@ -19,6 +19,7 @@ const booksRouter = require('./routes/books')
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
 
 // Set properties of server
 app.set('view engine', 'ejs');
@@ -26,6 +27,9 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
+
+// By default, options for handling put & delete requests are not available in the browser itself so we use method-override over the browser methods to perform put and delete requests.
+app.use(methodOverride('_method'));
 
 // Body Parser is a middleware that is used to parse the incoming request bodies. It is used to extract the entire body portion of an incoming request stream and exposes it on req.body. The middleware is available under the req.body property.
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: 'false' }));

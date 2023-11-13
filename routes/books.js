@@ -69,8 +69,7 @@ const renderNewPage = async (res, book, hasError = false) => {
             book: book
         }
         if (hasError) {
-            params.error = 'Error creating book'
-
+            params.errorMessage = 'Error creating book'
         }
         res.render('books/new', params)
     } catch (err) {

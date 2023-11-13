@@ -1,0 +1,23 @@
+<h2>
+    <%= author.name %>
+</h2>
+
+<a href="/authors/<%= author.id %>/edit">Edit</a>
+<%- include('../partials/deleteform',{url:`/authors/${author.id}`}) %>
+
+    <% if(booksByAuthor.length> 0) {%>
+        <h3>Books published by this author</h3>
+        <ul>
+            <% for(let book of booksByAuthor) { %>
+                <li>
+                    <a href="/books/<%= book.id %>">
+                        <%= book.title %>
+                    </a>
+                    <img src="<%= book.coverImagePath %>" alt="">
+                </li>
+                <% } %>
+        </ul>
+        <% }else { %>
+            <h3>This author has not published any books yet</h3>
+            <% } %>
+                <a href="/authors">Back to all authors</a>
