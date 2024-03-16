@@ -90,4 +90,62 @@ const saveCover = (book, coverEncoded) => {
 }
 
 
+// Shows selected Book's profile
+router.get('/:id', async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id)
+            .populate('author')
+            .exec();
+        res.render('books/show', { book: book })
+    }
+    catch (err) {
+        console.log('=== error books.js [43] ===', err);
+        res.redirect('/')
+    }
+
+})
+
+// Edit Form
+router.get('/:id/edit', async (req, res) => {
+    const book = await Book.findById(req.params.id);
+    try {
+        // console.log('=== book books.js [50] ===', book.title);
+        book.title = req.body.title;
+        book.author = req.body.author;
+        book.publishedDate = req.body.publishedDate;
+        book.pageCount = req.body.pageCount;
+        book.description = req.body.description;
+        if (req.body.cover) {
+            saveCover(book, req.body.cover);
+        }
+        await book.save();
+        res.redirect(`/books/${book.id}`);
+
+    } catch (err) {
+        if(book) {
+            renderEditPage(res, book,true);
+        }
+        else {
+            res.redirect('/');
+        }
+    }
+})
+
+const renderEditPage = async (res, book, hasError = false) => {
+    try {
+        const authors = await Author.find({});// {} means no conditions for find()
+        const params = {
+            authors: authors,
+            book: book
+        }
+        if (hasError) {
+            params.errorMessage = 'Error editing book'
+        }
+        res.render('books/edit', params)
+    } catch (err) {
+        res.redirect('books');
+    }
+}
+
+
 module.exports = router;

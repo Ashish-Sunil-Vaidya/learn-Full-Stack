@@ -1,11 +1,11 @@
-<h2>Edit Author</h2>
+<h2 class="text-blue-500 text-center font-bold py-4">Edit Author</h2>
 
-<form action="/authors/<%= author.id %>?_method=PUT" method="POST">
+<form action="/authors/<%= author.id %>?_method=PUT" method="POST" class="grid gap-3 px-3">
 
     <%- include('_namefield') %>
 
-        <input type="submit" value="Update Author">
+        <input class="text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-900 px-3 py-2 rounded-md" type="submit" value="Update Author">
 
-        <a href="/authors">Cancel</a>
+        <a class="text-white text-center bg-red-500 hover:bg-red-700 active:bg-red-900 p-1 rounded-md" href="/authors">Cancel</a>
 
 </form>

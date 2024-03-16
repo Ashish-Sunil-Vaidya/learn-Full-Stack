@@ -1,29 +1,21 @@
-<h2>Search Book</h2>
-<form action="/books" method="GET">
-    <div>
-        <label>Title</label>
-        <input type="text" name="title" value="<%= searchOptions.title %>">
-    </div>
-    <div>
-        <label>Published After</label>
-        <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
-    </div>
-    <div>
-        <label>Published Before</label>
-        <input type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
-    </div>
-    <button type="submit">Search</button>
+<form class="bg-blue-100 p-5 gap-3 justify-center items-center grid md:flex lg:flex xl:flex" action="/books" method="GET">
+
+    <input class="p-3" type="text" name="title" placeholder="Book Title" value="<%= searchOptions.title %>">
+    <div class="text-blue-500 font-bold">Published between</div>
+    <input class="p-3" type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
+    <div class="text-blue-500 font-bold">and</div>
+    <input class="p-3" type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
+    <button type="submit"
+        class="text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-900 px-3 py-2 rounded-md">Search</button>
 </form>
-<h3>Books Released</h3>
-<div>
-    <ul>
-        <% books.forEach(book=> { %>
-            <li>
-                <h4>
-                    <%= book.title %>
-                </h4>
-                <img width="100" height="150" src="<%= book.coverImagePath %>">
-            </li>
-            <% }) %>
-    </ul>
+<h1 class="text-blue-500 font-bold text-center p-4 text-xl ">Books Released</h1>
+<div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-3 p-3">
+    <% books.forEach(book=> { %>
+        <div class="flex border-2 flex-col justify-center items-center gap-2 p-3">
+            <h4>
+                <%= book.title %>
+            </h4>
+            <img width="100" height="150" src="<%= book.coverImagePath %>">
+        </div>
+        <% }) %>
 </div>

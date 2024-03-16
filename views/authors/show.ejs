@@ -1,23 +1,26 @@
-<h2>
-    <%= author.name %>
-</h2>
+<div class="text-blue-500 font-bold flex justify-center gap-5 items-center p-3">
+    <h1 class="text-xl">
+        <%= author.name %>'s Profile
+    </h1>
+    <a class="bg-blue-100 px-3 py-2 rounded-md" href="/authors/<%= author.id %>/edit">Edit</a>
+    <%- include('../partials/deleteform',{url:`/authors/${author.id}`}) %>
+    <a class="bg-blue-100 px-3 py-2 rounded-md" href="/authors">Back</a>
+</div>
 
-<a href="/authors/<%= author.id %>/edit">Edit</a>
-<%- include('../partials/deleteform',{url:`/authors/${author.id}`}) %>
 
-    <% if(booksByAuthor.length> 0) {%>
-        <h3>Books published by this author</h3>
-        <ul>
-            <% for(let book of booksByAuthor) { %>
-                <li>
-                    <a href="/books/<%= book.id %>">
-                        <%= book.title %>
-                    </a>
-                    <img src="<%= book.coverImagePath %>" alt="">
-                </li>
-                <% } %>
-        </ul>
-        <% }else { %>
-            <h3>This author has not published any books yet</h3>
+<% if(booksByAuthor.length> 0) {%>
+    <h3 class="text-blue-500 text-center text-lg font-bold py-4">Books published by this author</h3>
+    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-3 p-3">
+        <% for(let book of booksByAuthor) { %>
+            <div class="flex border-2 flex-col justify-center items-center gap-2 p-3">
+                <a href="/books/<%= book.id %>">
+                    <%= book.title %>
+                </a>
+                <img src="<%= book.coverImagePath %>" alt="">
+            </div>
             <% } %>
-                <a href="/authors">Back to all authors</a>
+    </div>
+    <% }else { %>
+        <h3>This author has not published any books yet</h3>
+        <% } %>
+            

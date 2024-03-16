@@ -1,21 +1,26 @@
-<h2>Search Authors</h2>
-<form action="/authors" method="GET">
-    <label for="name">Name</label>:
-    <input type="text" name="name" id="name" value="<%= searchOptions.name %>" required>
-    <input type="submit" value="Search">
+<h2 class=" text-center text-xl font-bold text-blue-500 py-5">Search For Authors</h2>
+<form action="/authors" method="GET" class="flex gap-3 p-3">
+
+    <input class="border-2 flex-1 p-3" placeholder="Search Author" type="text" name="name" id="name"
+        value="<%= searchOptions.name %>" required>
+    <input class="text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-900 px-3 rounded-md" type="submit"
+        value="Search">
 </form>
 <br>
 
+<h3 class=" text-center text-lg font-bold text-blue-500 py-5">Recently Added</h3>
 <%- include('../partials/errorMessage') %>
-<% authors.forEach((author)=> { %>
-    <div>
-        <h3>
-            <%= author.name %>
-        </h3>
-        <div style="display: flex; gap:10px">
-            <a href="/authors/<%= author.id %>">View</a>
-            <a href="/authors/<%= author.id %>/edit">Edit</a> 
-            <%- include('../partials/deleteform',{url:`/authors/${author.id}?_method=DELETE`}) %>
-        </div>
+    <div class="flex flex-col divide-y-2 border-y-2 mb-5 px-5">
+        <% authors.forEach((author)=> { %>
+            <div class="flex justify-between items-center p-5 ">
+                <h3>
+                    <%= author.name %>
+                </h3>
+                <div style="display: flex; gap:10px">
+                    <a class="text-blue-500 bg-blue-100 hover:bg-blue-200 active:bg-blue-300 px-3 py-2 rounded-md" href="/authors/<%= author.id %>">View</a>
+                    <a class="text-blue-500 bg-blue-100 hover:bg-blue-200 active:bg-blue-300 px-3 py-2 rounded-md" href="/authors/<%= author.id %>/edit">Edit</a>
+                    <%- include('../partials/deleteform',{url:`/authors/${author.id}?_method=DELETE`}) %>
+                </div>
+            </div>
+            <% }) %>
     </div>
-    <% }) %>

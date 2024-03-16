@@ -1,6 +1,6 @@
-<h2>Create a new Author</h2>
-<form action="/authors" method="POST">
+<h2 class=" text-center text-xl font-bold text-blue-500 py-5">Create a new Author</h2>
+<form class=" p-[10%] gap-3  grid items-center" action="/authors" method="POST">
     <%- include('_namefield') %>
-    <input type="submit" value="Create Author">
-    <a href="/authors">Cancel</a>
+    <input class="text-white bg-blue-500 hover:bg-blue-700 active:bg-blue-900 p-1 rounded-md" type="submit" value="Create Author">
+    <a href="/authors" class="text-white text-center bg-red-500 hover:bg-red-700 active:bg-red-900 p-1 rounded-md">Cancel</a>
 </form>

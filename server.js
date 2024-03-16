@@ -1,25 +1,16 @@
-//Load all env variables if app is hosted to production
-if (process.env.NODE_ENV !== 'production') {
-    console.log("Hosted in production");
-    require('dotenv').config();
-}
-else {
-    console.log("Hosted in development");
-}
 
 
 // Intialize varaibles required to run the server
 const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
-const productionPORT = process.env.PORT;
 const indexRouter = require('./routes/index');
 const authorsRouter = require('./routes/authours');
 const booksRouter = require('./routes/books')
 const mongoose = require("mongoose");
-const db = mongoose.connection;
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
+const DB_URL = "mongodb://localhost:27017";
 
 // Set properties of server
 app.set('view engine', 'ejs');
@@ -37,20 +28,17 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: 'false' }));
 // To apply all the routes  
 app.use('/', indexRouter);
 app.use('/authors', authorsRouter);
-app.use('/books',booksRouter);
+app.use('/books', booksRouter);
 
+console.log('Connecting to Database ...');
 // Connect to mongodb
-mongoose.connect(process.env.DB_URL);
-// Check if it's connected
-db.on('open', () => {
+mongoose.connect(DB_URL).then((result) => {
     console.log("Connection Successful ✔️");
-})
-db.on('error', () => {
-    console.error("Connection failed ❌");
+    app.listen(3000, () => {
+        console.log("Server connection to port: 3000");
+    })
+}).catch((err) => {
+    console.log("Connection failed ❌");
+    console.log(err);
 })
 
-//Use .env for production for dev use 3000
-app.listen(productionPORT || 3000, () => {
-    console.log("Server connection to port: " + (productionPORT || 3000));
-    console.log('Connecting to Database ...');
-})
